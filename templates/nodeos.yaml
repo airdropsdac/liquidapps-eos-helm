@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: liquibase-eos1
+  namespace: jsr
+spec:
+  serviceName: "dspnodeos"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: liquibase-eos
+  template:
+    metadata:
+      labels:
+        app: liquibase-eos
+    spec:
+      nodeName: n5
+      dnsPolicy: "None"
+      dnsConfig:
+        nameservers:
+          - 8.8.8.8
+      containers:
+      - name: eos
+        image: {{ .Values.image.repository }}
+        command: ["/bin/bash","-ec","cp /data1/EOSmainNet-config/nodeos-start.sh /root && chmod 755 /root/nodeos-start.sh && /root/nodeos-start.sh"]
+        envFrom:
+        - configMapRef:
+            name: bp-name
+        ports:
+        - containerPort: 8888
+          name: web
+        - containerPort: 9876
+          name: p2p
+        volumeMounts:
+        - name: configvol
+          mountPath: /data1/EOSmainNet-config
+      volumes:
+      - name: configvol
+        configMap:
+          name: nodeos-config

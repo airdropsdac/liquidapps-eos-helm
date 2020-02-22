@@ -1,0 +1,11 @@
+# Default values for nodeos.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+#
+bp:
+  producername: BPNAME
+  signatureprovider: '"YOUR_BLOCK_SIGN_PUB_KEY=KEY:YOUR_BLOCK_SIGN_PRIV_KEY"'
+
+image:
+  repository: aravindgv/eos18x:1.8.6
+  pullPolicy: IfNotPresent

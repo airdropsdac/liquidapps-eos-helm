@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  producer-name: {{ .Values.bp.producername }}
+  signature-provider: {{ .Values.bp.signatureprovider }}
+kind: ConfigMap
+metadata:
+  name: bp-name
