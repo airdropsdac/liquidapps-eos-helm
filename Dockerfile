@@ -1,4 +1,5 @@
 FROM ubuntu:18.04 as builder
+MAINTAINER Aravind G V "aravind.gv@gmail.com"
 #ARG branch=release/1.8.x
 #ARG branch=v1.8.6
 ARG branch=v2.0.0
